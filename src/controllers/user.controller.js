@@ -52,13 +52,13 @@ module.exports = {
   login: async (req, res) => {
     const { email, password } = req.body;
     if (email && password) {
-      //, email &&password kontrolü
+      //, email &&password control
 
-      // const user=await User.findOne({email})//, user modelinde finOne yap //!mail &password geldiyse
-      const user = await User.findOne({ email: email }); //! mail sorgusu eşleşme durumu
+      // const user=await User.findOne({email})
+      const user = await User.findOne({ email: email }); 
 
       if (user && user.password == passwordEncrypt(password)) {
-        //,böylebir user buldu mu yani veritabanında şifrenlenmi password ile kullanıcının gönderdiği eşitmi
+       
 
         //! SESSİON
         // req.session = {
@@ -77,7 +77,7 @@ module.exports = {
             req.sessionOptions.maxAge = 1000 *60 *60 *24* 3  //, 3 days
         }
        
-        //!kullanıcı login olmuştur
+        //! user login 
         res.status(200).send({
           error: false,
           message: "Login OK",
@@ -88,7 +88,7 @@ module.exports = {
         throw new Error("Email and password are requider");
       }
     } else {
-      //,email &password gelmediyse
+  
       res.errorStatusCode = 401;
       throw new Error("Email and password are requider");
     }
@@ -96,7 +96,7 @@ module.exports = {
   logout: async (req, res) => {
 
     req.session = null; //,session destroy:
-    //!kullanıcı logout olmuştur
+    //! user logout 
     res.status(200).send({
       error: false,
       message: "Logout OK",

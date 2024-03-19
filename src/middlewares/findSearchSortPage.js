@@ -13,17 +13,15 @@ module.exports = (req, res, next) => {
   //!  SEARCHING :
   // URL?search[key1]=value1&search[key2]=value2
   // https://www.mongodb.com/docs/manual/reference/operator/query/regex/
-  //, title ı test 0 değil , title içinde test 0 geçen i bul
-  const search = req.query?.search || {}; //,search içinde geçen ,eşittir değil
+  const search = req.query?.search || {};
   // console.log(search);
 
-  //+ title =test 0 şeklinde değil ,title içinde test 0 aramasnı sağlamak icin
   //? { title: 'test', content: 'test' } -> { title: { $regex: 'test' }, content: { $regex: 'test' } }
 
   for (let key in search) {
-    // search['title'] = { $regex: search['title'] }//,search title ı regex title'a donustur
+    // search['title'] = { $regex: search['title'] }
 
-    search[key] = { $regex: search[key], $options: "i" }; ///+ regex  title: 'test ifadesini data icerisnde ariyor, regex olmazsa eşleştirip arar /* $options:'i'/*büyük harf duyarlılıgınıkaldırmak */
+    search[key] = { $regex: search[key], $options: "i" };
   }
   // console.log(search);
 
@@ -47,7 +45,7 @@ module.exports = (req, res, next) => {
   //, PAGE:
   let page = Number(req.query?.page);
   // page = page> 0 ? page : 1
-  page = page > 0 ? page - 1 : 0; //, Backend 'de sayfa sayisi her zaman page-1 olarak hesaplanmali
+  page = page > 0 ? page - 1 : 0;
 
   // console.log("page", page);
 
@@ -62,12 +60,11 @@ module.exports = (req, res, next) => {
   // const data = await BlogPost.find({ ...filter, ...search }).sort(sort).skip(10).limit(limit )
 
   res.getModelList = async function (Model, populate = null) {
-    //,res 'a method atama
     return await Model.find({ ...filter, ...search })
       .sort(sort)
       .skip(10)
       .limit(limit)
-      .populate(populate); //,blogCategoryId nin detaylarini gorebilmek icin
+      .populate(populate);
   };
   // Details:
   res.getModelListDetails = async (Model) => {
