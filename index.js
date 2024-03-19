@@ -39,7 +39,7 @@ app.use(
 app.use(require('./src/middlewares/findSearchSortPage'))
 /* ------------------------------------------------------- */
 
-//! check logined user (sessionda bir kullanıcı varmı, olmuşsa veriler doğrumu)
+//! check logined user 
 app.use(require("./src/middlewares/userControl"));
 
 /* ------------------------------------------------------- */
@@ -48,18 +48,16 @@ app.all("/", (req, res) => {
 
   if (req.isLogin) {
     res.send({
-      //, login olup session a anasayfada erişme
       error: false,
       message: "WELCOME BLOG API PROJECT",
-      session: req.session, //,session da veri varsa anasayfadanda görebilme
+      session: req.session, 
       user: req.user,
     });
   } else {
     res.send({
-      //, login olup session a anasayfada erişme
       error: false,
       message: "WELCOME BLOG API PROJECT",
-      session: req.session, //,session da veri varsa anasayfadanda görebilme
+      session: req.session, 
     });
   }
 });
@@ -73,4 +71,4 @@ app.listen(PORT, () =>
   console.log(` Server Running on http://${HOST}:${PORT}`)
 );
 
-require('./src/sync')()
+// require('./src/sync')()

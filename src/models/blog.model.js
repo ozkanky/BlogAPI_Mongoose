@@ -52,13 +52,6 @@ const blogPostSchema = new mongoose.Schema({
     collection: "blogPost",
     timestamps: true
 })
-// mongoose.model('model ismi','hangi şemadan')
-
-// const BlogPostModel= mongoose.model('BlogPost',blogPostSchema)
-// module.exports={
-//     BlogPost: BlogPostModel,
-
-// }
 
 module.exports = {
     BlogCategory: mongoose.model('BlogCategory', blogCategorySchema),

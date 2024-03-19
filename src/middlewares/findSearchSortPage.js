@@ -57,7 +57,6 @@ module.exports = (req, res, next) => {
   // console.log("skip", skip);
   /* FILTERING & SEARCHING & SORTING & PAGINATION */
 
-  // const data = await BlogPost.find({ ...filter, ...search }).sort(sort).skip(10).limit(limit )
 
   res.getModelList = async function (Model, populate = null) {
     return await Model.find({ ...filter, ...search })
